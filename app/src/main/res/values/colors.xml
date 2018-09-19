@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- theme colors-->
+    <color name="colorPrimary">#4DB6AC</color>
+    <color name="colorPrimaryDark">#009688</color>
+    <color name="colorAccent">#fbf520</color>
+
+    <color name="grey">#3c151212</color>
+    <color name="grey_light">#f3eee8</color>
+    <color name="grey_light_new">#919fa7</color>
+
+</resources>

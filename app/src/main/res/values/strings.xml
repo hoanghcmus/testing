@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">StackOverFlow</string>
+    <string name="msg_network_connected">Network connected</string>
+    <string name="msg_network_dis_connected">Network Disconnected</string>
+
+    <string name="msg_info_list_user_empty">Currently, we don\'t have any user data.</string>
+    <string name="msg_error_fail_to_load_user_list">Fail to connect Data Server\n</string>
+    <string name="msg_error_fail_to_load_user_list_without_network_connection">No network connection!!!\nFail to connect Data Server</string>
+    <string name="msg_confirm_continue_or_not_without_network_connection">Your device does not connect to any network. Do you want to continue?</string>
+
+    <string name="empty"></string>
+</resources>
