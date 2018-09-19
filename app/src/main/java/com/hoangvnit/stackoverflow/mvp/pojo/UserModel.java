@@ -10,7 +10,7 @@ public class UserModel extends BaseModel{
     private String display_name;
 
     @Expose
-    private String User_image;
+    private String profile_image;
 
     @Expose
     private boolean is_employee;
@@ -27,14 +27,14 @@ public class UserModel extends BaseModel{
     }
 
     public String getUser_image() {
-        return User_image;
+        return profile_image;
     }
 
     public void setUser_image(String User_image) {
-        this.User_image = User_image;
+        this.profile_image = User_image;
     }
 
-    public boolean isIs_employee() {
+    public boolean is_employee() {
         return is_employee;
     }
 
@@ -53,14 +53,14 @@ public class UserModel extends BaseModel{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.display_name);
-        dest.writeString(this.User_image);
+        dest.writeString(this.profile_image);
         dest.writeByte((byte) (this.is_employee ? 1 : 0));
         dest.writeInt(this.reputation);
     }
 
     protected UserModel(Parcel in) {
         this.display_name = in.readString();
-        this.User_image = in.readString();
+        this.profile_image = in.readString();
         this.is_employee = in.readByte() != 0;
         this.reputation = in.readInt();
     }

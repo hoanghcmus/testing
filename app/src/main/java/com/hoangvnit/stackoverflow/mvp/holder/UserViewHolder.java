@@ -18,6 +18,9 @@ public class UserViewHolder extends BaseViewHolder {
     @BindView(R.id.reputation)
     public TextView mTxtReputation;
 
+    @BindView(R.id.sof)
+    public TextView mTxtSOFUser;
+
     @BindView(R.id.avatar)
     public CircleImageView mImgAvatar;
 

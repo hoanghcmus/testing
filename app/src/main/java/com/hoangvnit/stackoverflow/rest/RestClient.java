@@ -14,6 +14,7 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -59,9 +60,13 @@ public class RestClient {
                 }
             };
 
+            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
             mHttpClient = new OkHttpClient.Builder()
                     .addInterceptor(new NetworkInterceptor(context))
                     .addInterceptor(headerInterceptor)
+                    .addInterceptor(loggingInterceptor)
                     .cache(cache)
                     .connectTimeout(Setting.OK_HTTP_CLIENT_TIMEOUT, TimeUnit.SECONDS)
                     .readTimeout(Setting.OK_HTTP_CLIENT_TIMEOUT, TimeUnit.SECONDS)

@@ -1,9 +1,13 @@
 package com.hoangvnit.stackoverflow.mvp.userlist;
 
+import android.support.v4.content.ContextCompat;
+import android.view.View;
+
 import com.hoangvnit.stackoverflow.R;
 import com.hoangvnit.stackoverflow.mvp.adapter.BaseAdapter;
 import com.hoangvnit.stackoverflow.mvp.holder.UserViewHolder;
 import com.hoangvnit.stackoverflow.mvp.pojo.UserModel;
+import com.hoangvnit.stackoverflow.mvp.pojo.UserResponseModel;
 import com.hoangvnit.stackoverflow.rest.RestClient;
 import com.hoangvnit.stackoverflow.rest.UserService;
 import com.hoangvnit.stackoverflow.rx.SimpleSubscriber;
@@ -54,11 +58,17 @@ public class UserListPresenterImpl implements UserListContract.UserListPresenter
             protected void populateViewHolder(UserViewHolder viewHolder, UserModel user, int position) {
 
                 viewHolder.mTxtName.setText(user.getDisplay_name());
-                viewHolder.mTxtReputation.setText(user.getReputation());
+                viewHolder.mTxtReputation.setText("Rep: " + user.getReputation());
+                if (user.is_employee()) {
+                    viewHolder.mTxtSOFUser.setText(mUserListView.getContext().getString(R.string.sof_user));
+                    viewHolder.mTxtSOFUser.setTextColor( ContextCompat.getColor(mUserListView.getContext(), R.color.colorPrimaryDark));
+                } else {
+                    viewHolder.mTxtSOFUser.setText(mUserListView.getContext().getString(R.string.not_sof_user));
+                    viewHolder.mTxtSOFUser.setTextColor( ContextCompat.getColor(mUserListView.getContext(), R.color.grey));
+                }
                 Picasso.get().load(user.getUser_image())
                         .placeholder(R.drawable.user)
                         .into(viewHolder.mImgAvatar);
-
             }
         };
 
@@ -79,13 +89,14 @@ public class UserListPresenterImpl implements UserListContract.UserListPresenter
         mSubscription = mUserService.getUsers(page, amount, "stackoverflow")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SimpleSubscriber<List<UserModel>>() {
+                .subscribe(new SimpleSubscriber<UserResponseModel>() {
                     @Override
-                    public void onNext(List<UserModel> users) {
+                    public void onNext(UserResponseModel userResponse) {
                         if (mUserListView != null) {
                             mUserListView.hideProgressDialog();
 
-                            if (users != null && !users.isEmpty()) {
+                            if (userResponse != null) {
+                                List<UserModel> users = userResponse.getItems();
                                 mBaseAdapter.setData(users);
                                 mUserListView.setListUser(mBaseAdapter);
                             }

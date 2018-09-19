@@ -1,6 +1,8 @@
 package com.hoangvnit.stackoverflow.rest;
 
 import com.hoangvnit.stackoverflow.mvp.pojo.UserModel;
+import com.hoangvnit.stackoverflow.mvp.pojo.UserResponseModel;
+
 import java.util.List;
 
 import retrofit2.http.GET;
@@ -11,7 +13,7 @@ import rx.Observable;
 public interface UserService {
 
     @GET("users")
-    Observable<List<UserModel>> getUsers(@Query("page") int page, @Query("pagesize") int amount, @Query("pagesize") String site);
+    Observable<UserResponseModel> getUsers(@Query("page") int page, @Query("pagesize") int amount, @Query("site") String site);
 
 
 }

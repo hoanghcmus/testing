@@ -3,6 +3,9 @@
     <string name="msg_network_connected">Network connected</string>
     <string name="msg_network_dis_connected">Network Disconnected</string>
 
+    <string name="sof_user">SOF user</string>
+    <string name="not_sof_user">Registered user</string>
+
     <string name="msg_info_list_user_empty">Currently, we don\'t have any user data.</string>
     <string name="msg_error_fail_to_load_user_list">Fail to connect Data Server\n</string>
     <string name="msg_error_fail_to_load_user_list_without_network_connection">No network connection!!!\nFail to connect Data Server</string>
