@@ -1,10 +1,10 @@
 package com.hoangvnit.stackoverflow.mvp.reputation;
 
 import com.hoangvnit.stackoverflow.R;
-import com.hoangvnit.stackoverflow.mvp.adapter.UserAdapter;
-import com.hoangvnit.stackoverflow.mvp.holder.UserViewHolder;
-import com.hoangvnit.stackoverflow.mvp.pojo.UserModel;
-import com.hoangvnit.stackoverflow.mvp.pojo.UserResponseModel;
+import com.hoangvnit.stackoverflow.mvp.adapter.BaseAdapter;
+import com.hoangvnit.stackoverflow.mvp.holder.UserReputationViewHolder;
+import com.hoangvnit.stackoverflow.mvp.pojo.ReputationModel;
+import com.hoangvnit.stackoverflow.mvp.pojo.UserReputationResponseModel;
 import com.hoangvnit.stackoverflow.rest.RestClient;
 import com.hoangvnit.stackoverflow.rest.UserService;
 import com.hoangvnit.stackoverflow.rx.SimpleSubscriber;
@@ -20,23 +20,25 @@ import rx.schedulers.Schedulers;
 /**
  * @author Nguyen Ngoc Hoang (www.hoangvnit.com)
  */
-public class UserReputationPresenterImpl implements UserReputationContract.UserListPresenter {
-    private UserReputationFragment mUserListView;
+public class UserReputationPresenterImpl implements UserReputationContract.UserReputationPresenter {
+    private UserReputationFragment mUserReputationListView;
     private UserService mUserService;
     private Subscription mSubscription;
-    private UserAdapter mUserAdapter;
+    private BaseAdapter<ReputationModel, UserReputationViewHolder> mUserReputationAdapter;
 
-    public UserReputationPresenterImpl(UserReputationFragment mUserListFragment) {
-        this.mUserListView = mUserListFragment;
+    private int mUserId = 0;
+
+    public UserReputationPresenterImpl(UserReputationFragment mUserReputationListFragment) {
+        this.mUserReputationListView = mUserReputationListFragment;
     }
 
     @Override
-    public void onAttach(UserReputationContract.UserListView view) {
+    public void onAttach(UserReputationContract.UserReputationView view) {
 
     }
 
     @Override
-    public void onDetach(UserReputationContract.UserListView view) {
+    public void onDetach(UserReputationContract.UserReputationView view) {
 
     }
 
@@ -45,16 +47,24 @@ public class UserReputationPresenterImpl implements UserReputationContract.UserL
 
         mUserService = RestClient.getInstance().getUserService();
 
-        mUserAdapter = new UserAdapter(mUserListView.getContext(), R.layout.item_user, UserViewHolder.class);
+        mUserReputationAdapter = new BaseAdapter<ReputationModel, UserReputationViewHolder>(
+                R.layout.item_reputation,
+                UserReputationViewHolder.class
+        ) {
+            @Override
+            protected void populateViewHolder(UserReputationViewHolder viewHolder, ReputationModel model, int position) {
 
-        if (mUserListView != null) {
-            if (NetworkUtils.isNetworkConnected(mUserListView.getContext())) {
-                mUserListView.showProgressDialog();
-                fetchUserList(1, 30);
+            }
+        };
+
+        if (mUserReputationListView != null) {
+            if (NetworkUtils.isNetworkConnected(mUserReputationListView.getContext())) {
+                mUserReputationListView.showProgressDialog();
+                fetchUserReputationList(mUserId, 1, 30);
             } else {
-                mUserListView.adjustDisplayOfListUserSection(true);
-                String message = mUserListView.getStr(R.string.msg_error_fail_to_load_user_list_without_network_connection);
-                mUserListView.setMessage(message);
+                mUserReputationListView.adjustDisplayOfListUserReputationSection(true);
+                String message = mUserReputationListView.getStr(R.string.msg_error_fail_to_load_user_list_without_network_connection);
+                mUserReputationListView.setMessage(message);
             }
         }
     }
@@ -62,41 +72,37 @@ public class UserReputationPresenterImpl implements UserReputationContract.UserL
     @Override
     public void loadMore(int page) {
         LogUtils.i("hcmus - load page: " + page);
-        fetchUserList(page, 30);
+        fetchUserReputationList(mUserId, page, 30);
 
     }
 
-    @Override
-    public void filterSofUser(boolean isFilter) {
-        mUserAdapter.filterSofUser(isFilter);
-    }
 
-    private void fetchUserList(int page, int amount) {
+    private void fetchUserReputationList(int userId, int page, int amount) {
         unSubscribe();
-        mSubscription = mUserService.getUsers(page, amount, "stackoverflow")
+        mSubscription = mUserService.getUserReputations(userId, page, amount, "stackoverflow")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SimpleSubscriber<UserResponseModel>() {
+                .subscribe(new SimpleSubscriber<UserReputationResponseModel>() {
                     @Override
-                    public void onNext(UserResponseModel userResponse) {
-                        if (mUserListView != null) {
-                            mUserListView.hideProgressDialog();
+                    public void onNext(UserReputationResponseModel userReputationResponse) {
+                        if (mUserReputationListView != null) {
+                            mUserReputationListView.hideProgressDialog();
 
-                            if (userResponse != null) {
-                                List<UserModel> users = userResponse.getItems();
-                                mUserAdapter.setData(users);
-                                mUserListView.setListUser(mUserAdapter);
+                            if (userReputationResponse != null) {
+                                List<ReputationModel> reputations = userReputationResponse.getItems();
+                                mUserReputationAdapter.setData(reputations);
+                                mUserReputationListView.setListReputation(mUserReputationAdapter);
                             }
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        if (mUserListView != null) {
-                            mUserListView.hideProgressDialog();
-                            String message = mUserListView.getStr(R.string.msg_error_fail_to_load_user_list);
-                            mUserListView.adjustDisplayOfListUserSection(true);
-                            mUserListView.setMessage(message + e.toString());
+                        if (mUserReputationListView != null) {
+                            mUserReputationListView.hideProgressDialog();
+                            String message = mUserReputationListView.getStr(R.string.msg_error_fail_to_load_user_list);
+                            mUserReputationListView.adjustDisplayOfListUserReputationSection(true);
+                            mUserReputationListView.setMessage(message + e.toString());
                         }
                         LogUtils.e(e.toString());
                     }

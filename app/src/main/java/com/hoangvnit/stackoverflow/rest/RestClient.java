@@ -55,6 +55,7 @@ public class RestClient {
 
                     newRequest = request.newBuilder()
                             .addHeader(Setting.REQUEST_HEADER_CONTENT_TYPE, Setting.REQUEST_HEADER_CONTENT_TYPE_JSON_VALUE)
+                            .addHeader(Setting.REQUEST_HEADER_ACCEPT_LANGUAGE, Setting.REQUEST_HEADER_ACCEPT_LANGUAGE_VALUE)
                             .build();
                     return chain.proceed(newRequest);
                 }

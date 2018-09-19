@@ -7,7 +7,7 @@ package com.hoangvnit.stackoverflow.common;
  */
 public enum FRAGMENT_ID {
     USER_LIST_FRAGMENT("USER_LIST_FRAGMENT"),
-    USER_DETAIL_FRAGMENT("USER_DETAIL_FRAGMENT");
+    USER_REPUTATION_FRAGMENT("USER_REPUTATION_FRAGMENT");
 
     private String key;
 

@@ -28,15 +28,15 @@ public class UserResponseModel extends BaseModel {
         in.readList(this.items, List.class.getClassLoader());
     }
 
-    public static final Creator<UserModel> CREATOR = new Creator<UserModel>() {
+    public static final Creator<UserResponseModel> CREATOR = new Creator<UserResponseModel>() {
         @Override
-        public UserModel createFromParcel(Parcel source) {
-            return new UserModel(source);
+        public UserResponseModel createFromParcel(Parcel source) {
+            return new UserResponseModel(source);
         }
 
         @Override
-        public UserModel[] newArray(int size) {
-            return new UserModel[size];
+        public UserResponseModel[] newArray(int size) {
+            return new UserResponseModel[size];
         }
     };
 }

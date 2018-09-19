@@ -137,6 +137,7 @@ public class UserListFragment extends BaseFragment
     public void adjustDisplayOfListUserSection(boolean isListUserEmpty) {
         mTxtMessage.setVisibility(isListUserEmpty ? View.VISIBLE : View.GONE);
         mRclUserList.setVisibility(isListUserEmpty ? View.GONE : View.VISIBLE);
+        mSwFilterSofUser.setVisibility(isListUserEmpty ? View.GONE : View.VISIBLE);
     }
 
     @Override

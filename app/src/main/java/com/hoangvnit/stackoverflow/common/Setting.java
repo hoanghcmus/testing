@@ -11,6 +11,8 @@ public class Setting {
     public static final String GSON_DATE_FORMAT = "dd/MM/yyyy";
     public static final String REQUEST_HEADER_CONTENT_TYPE = "Content-Type";
     public static final String REQUEST_HEADER_CONTENT_TYPE_JSON_VALUE = "application/json";
+    public static final String REQUEST_HEADER_ACCEPT_LANGUAGE = "Accept-Language";
+    public static final String REQUEST_HEADER_ACCEPT_LANGUAGE_VALUE = "en";
 
     public static final int OK_HTTP_CLIENT_CACHE_SIZE = 10 * 1024 * 1024;
     public static final int OK_HTTP_CLIENT_TIMEOUT = 30;

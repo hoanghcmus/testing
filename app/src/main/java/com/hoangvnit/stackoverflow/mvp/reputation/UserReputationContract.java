@@ -1,8 +1,12 @@
 package com.hoangvnit.stackoverflow.mvp.reputation;
 
+import android.view.View;
+
 import com.hoangvnit.stackoverflow.base.BaseContract;
 import com.hoangvnit.stackoverflow.mvp.adapter.BaseAdapter;
+import com.hoangvnit.stackoverflow.mvp.holder.UserReputationViewHolder;
 import com.hoangvnit.stackoverflow.mvp.holder.UserViewHolder;
+import com.hoangvnit.stackoverflow.mvp.pojo.ReputationModel;
 import com.hoangvnit.stackoverflow.mvp.pojo.UserModel;
 
 
@@ -13,23 +17,21 @@ import com.hoangvnit.stackoverflow.mvp.pojo.UserModel;
  */
 public class UserReputationContract {
 
-    public interface UserListPresenter extends BaseContract.BasePresenter<UserListView> {
+    public interface UserReputationPresenter extends BaseContract.BasePresenter<UserReputationView> {
 
         void init();
 
         void unSubscribe();
 
         void loadMore(int page);
-
-        void  filterSofUser(boolean isFilter);
     }
 
-    public interface UserListView extends BaseContract.BaseView {
+    public interface UserReputationView extends BaseContract.BaseView {
 
-        void adjustDisplayOfListUserSection(boolean isListUserEmpty);
+        public void adjustDisplayOfListUserReputationSection(boolean isListUserEmpty);
 
-        void setListUser(BaseAdapter<UserModel, UserViewHolder> mUserAdapter);
+        public void setListReputation(BaseAdapter<ReputationModel, UserReputationViewHolder> userReputationAdapter);
 
-        void setMessage(String message);
+        public void setMessage(String message);
     }
 }

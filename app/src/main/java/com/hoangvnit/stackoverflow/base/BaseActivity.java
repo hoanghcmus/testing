@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.hoangvnit.stackoverflow.R;
 import com.hoangvnit.stackoverflow.common.FRAGMENT_ID;
+import com.hoangvnit.stackoverflow.mvp.reputation.UserReputationFragment;
 import com.hoangvnit.stackoverflow.mvp.userlist.UserListFragment;
 
 import butterknife.ButterKnife;
@@ -185,8 +186,8 @@ public class BaseActivity extends AppCompatActivity {
         BaseFragment fragment = null;
         if (id == FRAGMENT_ID.USER_LIST_FRAGMENT) {
             fragment = new UserListFragment();
-        } else if (id == FRAGMENT_ID.USER_DETAIL_FRAGMENT) {
-//            fragment = new UserDetailFragment();
+        } else if (id == FRAGMENT_ID.USER_REPUTATION_FRAGMENT) {
+            fragment = new UserReputationFragment();
         }
         return fragment;
     }
