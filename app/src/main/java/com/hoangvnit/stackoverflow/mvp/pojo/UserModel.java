@@ -7,7 +7,16 @@ import com.google.gson.annotations.Expose;
 public class UserModel extends BaseModel{
 
     @Expose
+    private int user_id;
+
+    @Expose
     private String display_name;
+
+    @Expose
+    private String location;
+
+    @Expose
+    private int age;
 
     @Expose
     private String profile_image;
@@ -18,12 +27,36 @@ public class UserModel extends BaseModel{
     @Expose
     private int reputation;
 
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
     public String getDisplay_name() {
         return display_name;
     }
 
     public void setDisplay_name(String display_name) {
         this.display_name = display_name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getUser_image() {

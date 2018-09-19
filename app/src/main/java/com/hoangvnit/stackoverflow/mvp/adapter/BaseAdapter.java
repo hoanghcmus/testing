@@ -1,5 +1,6 @@
 package com.hoangvnit.stackoverflow.mvp.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +27,18 @@ public abstract class BaseAdapter<M extends BaseModel, VH extends BaseViewHolder
 
     List<M> mListData = new ArrayList<>();
 
+    List<M> mListDataOriginal = new ArrayList<>();
+
     public List<M> getData() {
         return mListData;
+    }
+
+    Context mContext;
+
+    public BaseAdapter(Context context, int modelLayout, Class<VH> viewHolderClass) {
+        this.mContext = context;
+        mViewHolderClass = viewHolderClass;
+        mModelLayout = modelLayout;
     }
 
     public BaseAdapter(int modelLayout, Class<VH> viewHolderClass) {
@@ -69,6 +80,7 @@ public abstract class BaseAdapter<M extends BaseModel, VH extends BaseViewHolder
 
     public void setData(List<M> listData) {
         mListData.addAll(listData);
+        mListDataOriginal = mListData;
         notifyDataSetChanged();
     }
 

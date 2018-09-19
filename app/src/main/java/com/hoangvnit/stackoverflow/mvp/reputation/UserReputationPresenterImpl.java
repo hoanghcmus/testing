@@ -1,10 +1,6 @@
-package com.hoangvnit.stackoverflow.mvp.userlist;
-
-import android.support.v4.content.ContextCompat;
-import android.view.View;
+package com.hoangvnit.stackoverflow.mvp.reputation;
 
 import com.hoangvnit.stackoverflow.R;
-import com.hoangvnit.stackoverflow.mvp.adapter.BaseAdapter;
 import com.hoangvnit.stackoverflow.mvp.adapter.UserAdapter;
 import com.hoangvnit.stackoverflow.mvp.holder.UserViewHolder;
 import com.hoangvnit.stackoverflow.mvp.pojo.UserModel;
@@ -14,10 +10,8 @@ import com.hoangvnit.stackoverflow.rest.UserService;
 import com.hoangvnit.stackoverflow.rx.SimpleSubscriber;
 import com.hoangvnit.stackoverflow.utils.LogUtils;
 import com.hoangvnit.stackoverflow.utils.NetworkUtils;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
-
 
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -26,23 +20,23 @@ import rx.schedulers.Schedulers;
 /**
  * @author Nguyen Ngoc Hoang (www.hoangvnit.com)
  */
-public class UserListPresenterImpl implements UserListContract.UserListPresenter {
-    private UserListFragment mUserListView;
+public class UserReputationPresenterImpl implements UserReputationContract.UserListPresenter {
+    private UserReputationFragment mUserListView;
     private UserService mUserService;
     private Subscription mSubscription;
     private UserAdapter mUserAdapter;
 
-    public UserListPresenterImpl(UserListFragment mUserListFragment) {
+    public UserReputationPresenterImpl(UserReputationFragment mUserListFragment) {
         this.mUserListView = mUserListFragment;
     }
 
     @Override
-    public void onAttach(UserListContract.UserListView view) {
+    public void onAttach(UserReputationContract.UserListView view) {
 
     }
 
     @Override
-    public void onDetach(UserListContract.UserListView view) {
+    public void onDetach(UserReputationContract.UserListView view) {
 
     }
 

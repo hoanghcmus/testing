@@ -4,12 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.hoangvnit.stackoverflow.common.FRAGMENT_ID;
-import com.hoangvnit.stackoverflow.ui.MainActivity;
 
 import butterknife.ButterKnife;
 
@@ -41,6 +41,12 @@ public abstract class BaseFragment extends Fragment {
         ButterKnife.bind(this, view);
         initView();
         return view;
+    }
+
+    public void setActionBarTitle(String title) {
+
+        if (mActivity != null)
+            mActivity.setActionBarTitle(title);
     }
 
     public void showShortToast(String message) {

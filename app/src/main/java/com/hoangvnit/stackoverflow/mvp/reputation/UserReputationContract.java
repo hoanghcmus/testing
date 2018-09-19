@@ -1,4 +1,4 @@
-package com.hoangvnit.stackoverflow.mvp.userlist;
+package com.hoangvnit.stackoverflow.mvp.reputation;
 
 import com.hoangvnit.stackoverflow.base.BaseContract;
 import com.hoangvnit.stackoverflow.mvp.adapter.BaseAdapter;
@@ -7,11 +7,11 @@ import com.hoangvnit.stackoverflow.mvp.pojo.UserModel;
 
 
 /**
- * Contract for {@link UserListFragment} and {@link UserListPresenterImpl}
+ * Contract for {@link UserReputationFragment} and {@link UserReputationPresenterImpl}
  *
  * @author Nguyen Ngoc Hoang (www.hoangvnit.com)
  */
-public class UserListContract {
+public class UserReputationContract {
 
     public interface UserListPresenter extends BaseContract.BasePresenter<UserListView> {
 

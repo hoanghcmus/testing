@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.hoangvnit.stackoverflow.R;
@@ -43,6 +43,14 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
+    }
+
+    protected void setActionBarTitle(String title) {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(title.toUpperCase());
+            actionBar.setDisplayShowHomeEnabled(true);
+        }
     }
 
     protected void showProgressDialog() {

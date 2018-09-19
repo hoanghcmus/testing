@@ -15,4 +15,6 @@ public class Setting {
     public static final int OK_HTTP_CLIENT_CACHE_SIZE = 10 * 1024 * 1024;
     public static final int OK_HTTP_CLIENT_TIMEOUT = 30;
     public static final String OK_HTTP_CLIENT_CACHE_FILE_NAME = "responses";
+
+    public static final String IS_FILTER_SOF_USER_KEY = "isFilterSofUser";
 }

@@ -1,10 +1,14 @@
 <resources>
-    <string name="app_name">StackOverFlow</string>
+    <string name="app_name">Stack OverFlow</string>
     <string name="msg_network_connected">Network connected</string>
     <string name="msg_network_dis_connected">Network Disconnected</string>
 
     <string name="sof_user">SOF user</string>
-    <string name="not_sof_user">Registered user</string>
+    <string name="not_sof_user">Normal user</string>
+    <string name="filter_sof_user">Show SOF user only</string>
+
+    <string name="title_user_list">User list</string>
+    <string name="title_user_reputation">User\'s reputation</string>
 
     <string name="msg_info_list_user_empty">Currently, we don\'t have any user data.</string>
     <string name="msg_error_fail_to_load_user_list">Fail to connect Data Server\n</string>

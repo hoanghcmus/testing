@@ -12,8 +12,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @author Nguyen Ngoc Hoang (www.hoangvnit.com)
  */
 public class UserViewHolder extends BaseViewHolder {
+    @BindView(R.id.userId)
+    public TextView mTxUserId;
+
     @BindView(R.id.name)
     public TextView mTxtName;
+
+    @BindView(R.id.age)
+    public TextView mTxtAge;
+
+    @BindView(R.id.location)
+    public TextView mTxtLocation;
 
     @BindView(R.id.reputation)
     public TextView mTxtReputation;

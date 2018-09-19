@@ -5,12 +5,26 @@
     android:orientation="vertical">
 
 
+    <Switch
+        android:id="@+id/filter_sof_usr_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="@dimen/_10dp"
+        android:checked="false"
+        android:text="@string/filter_sof_user"
+        android:textColor="@color/colorPrimary"
+        android:textOff="No"
+        android:textOn="Yes"
+        android:textSize="@dimen/_16sp" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/user_list_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/_10dp"
         android:background="@color/grey_light" />
 
     <TextView

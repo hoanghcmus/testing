@@ -1,4 +1,4 @@
-package com.hoangvnit.stackoverflow.mvp.userlist;
+package com.hoangvnit.stackoverflow.mvp.reputation;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -31,8 +31,8 @@ import butterknife.BindView;
 /**
  * @author Nguyen Ngoc Hoang (www.hoangvnit.com)
  */
-public class UserListFragment extends BaseFragment
-        implements UserListContract.UserListView {
+public class UserReputationFragment extends BaseFragment
+        implements UserReputationContract.UserListView {
 
     @BindView(R.id.filter_sof_usr_switch)
     Switch mSwFilterSofUser;
@@ -43,7 +43,7 @@ public class UserListFragment extends BaseFragment
     @BindView(R.id.user_list_recycler_view)
     RecyclerView mRclUserList;
 
-    private UserListContract.UserListPresenter mUserListPresenter;
+    private UserReputationContract.UserListPresenter mUserListPresenter;
     private LinearLayoutManager mLinearLayoutManager;
     private EndlessRecyclerViewScrollListener scrollListener;
     private BaseAdapter<UserModel, UserViewHolder> mUserAdapter;
@@ -59,7 +59,7 @@ public class UserListFragment extends BaseFragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mUserListPresenter = new UserListPresenterImpl(this);
+        mUserListPresenter = new UserReputationPresenterImpl(this);
 
         IntentFilter intentFilterNetworkChange = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
         mNetworkStateReceiver = new NetworkStateReceiver(mUserListPresenter);
@@ -160,10 +160,10 @@ public class UserListFragment extends BaseFragment
     }
 
     public static class NetworkStateReceiver extends BroadcastReceiver {
-        private UserListContract.UserListPresenter mUserListPresenter;
+        private UserReputationContract.UserListPresenter mUserListPresenter;
         private static boolean isFirstTime = true;
 
-        public NetworkStateReceiver(UserListContract.UserListPresenter userListPresenter) {
+        public NetworkStateReceiver(UserReputationContract.UserListPresenter userListPresenter) {
             this.mUserListPresenter = userListPresenter;
         }
 
