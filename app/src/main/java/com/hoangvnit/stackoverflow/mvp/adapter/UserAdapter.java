@@ -3,11 +3,15 @@ package com.hoangvnit.stackoverflow.mvp.adapter;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.Toast;
 
 import com.hoangvnit.stackoverflow.R;
+import com.hoangvnit.stackoverflow.common.OnItemClickListener;
 import com.hoangvnit.stackoverflow.mvp.holder.UserViewHolder;
+import com.hoangvnit.stackoverflow.mvp.pojo.BaseModel;
 import com.hoangvnit.stackoverflow.mvp.pojo.UserModel;
 import com.squareup.picasso.Picasso;
 
@@ -18,6 +22,8 @@ public class UserAdapter extends BaseAdapter<UserModel, UserViewHolder> implemen
 
     private boolean isFilterSofUser = false;
 
+    private OnItemClickListener itemClickListener;
+
     public UserAdapter(Context context, int modelLayout, Class viewHolderClass) {
         super(context, modelLayout, viewHolderClass);
     }
@@ -26,9 +32,16 @@ public class UserAdapter extends BaseAdapter<UserModel, UserViewHolder> implemen
         super(modelLayout, viewHolderClass);
     }
 
+    public OnItemClickListener getItemClickListener() {
+        return itemClickListener;
+    }
+
+    public void setItemClickListener(OnItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+    }
 
     @Override
-    protected void populateViewHolder(UserViewHolder viewHolder, UserModel model, int position) {
+    protected void populateViewHolder(UserViewHolder viewHolder, final UserModel model, int position) {
         viewHolder.mTxUserId.setText("" + model.getUser_id());
         viewHolder.mTxtName.setText(model.getDisplay_name());
         viewHolder.mTxtAge.setText("" + model.getAge());
@@ -44,6 +57,15 @@ public class UserAdapter extends BaseAdapter<UserModel, UserViewHolder> implemen
         Picasso.get().load(model.getUser_image())
                 .placeholder(R.drawable.ic_user)
                 .into(viewHolder.mImgAvatar);
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (itemClickListener != null) {
+                    itemClickListener.onItemClick(model);
+                }
+            }
+        });
     }
 
     public void filterSofUser(boolean isFilter) {

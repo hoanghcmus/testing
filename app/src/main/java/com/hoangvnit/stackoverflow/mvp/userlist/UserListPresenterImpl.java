@@ -1,12 +1,12 @@
 package com.hoangvnit.stackoverflow.mvp.userlist;
 
-import android.support.v4.content.ContextCompat;
-import android.view.View;
+import android.widget.Toast;
 
 import com.hoangvnit.stackoverflow.R;
-import com.hoangvnit.stackoverflow.mvp.adapter.BaseAdapter;
+import com.hoangvnit.stackoverflow.common.OnItemClickListener;
 import com.hoangvnit.stackoverflow.mvp.adapter.UserAdapter;
 import com.hoangvnit.stackoverflow.mvp.holder.UserViewHolder;
+import com.hoangvnit.stackoverflow.mvp.pojo.BaseModel;
 import com.hoangvnit.stackoverflow.mvp.pojo.UserModel;
 import com.hoangvnit.stackoverflow.mvp.pojo.UserResponseModel;
 import com.hoangvnit.stackoverflow.rest.RestClient;
@@ -14,7 +14,6 @@ import com.hoangvnit.stackoverflow.rest.UserService;
 import com.hoangvnit.stackoverflow.rx.SimpleSubscriber;
 import com.hoangvnit.stackoverflow.utils.LogUtils;
 import com.hoangvnit.stackoverflow.utils.NetworkUtils;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -53,6 +52,8 @@ public class UserListPresenterImpl implements UserListContract.UserListPresenter
 
         mUserAdapter = new UserAdapter(mUserListView.getContext(), R.layout.item_user, UserViewHolder.class);
 
+        registerUserItemClickListener(mUserAdapter);
+
         if (mUserListView != null) {
             if (NetworkUtils.isNetworkConnected(mUserListView.getContext())) {
                 mUserListView.showProgressDialog();
@@ -65,11 +66,23 @@ public class UserListPresenterImpl implements UserListContract.UserListPresenter
         }
     }
 
+    private void registerUserItemClickListener(UserAdapter userAdapter) {
+        OnItemClickListener itemClickListener = new OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseModel item) {
+                UserModel userModel = (UserModel) item;
+                if (mUserListView != null) {
+                    mUserListView.viewReputationDetail(userModel);
+                }
+            }
+        };
+
+        userAdapter.setItemClickListener(itemClickListener);
+    }
+
     @Override
     public void loadMore(int page) {
-        LogUtils.i("hcmus - load page: " + page);
         fetchUserList(page, 30);
-
     }
 
     @Override

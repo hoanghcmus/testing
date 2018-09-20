@@ -19,10 +19,12 @@ import android.widget.Toast;
 import com.hoangvnit.stackoverflow.R;
 import com.hoangvnit.stackoverflow.base.BaseFragment;
 import com.hoangvnit.stackoverflow.common.EndlessRecyclerViewScrollListener;
+import com.hoangvnit.stackoverflow.common.FRAGMENT_ID;
 import com.hoangvnit.stackoverflow.common.Setting;
 import com.hoangvnit.stackoverflow.mvp.adapter.BaseAdapter;
 import com.hoangvnit.stackoverflow.mvp.holder.UserViewHolder;
 import com.hoangvnit.stackoverflow.mvp.pojo.UserModel;
+import com.hoangvnit.stackoverflow.mvp.reputation.UserReputationFragment;
 import com.hoangvnit.stackoverflow.utils.LogUtils;
 import com.hoangvnit.stackoverflow.utils.PreferencesUtils;
 
@@ -153,6 +155,17 @@ public class UserListFragment extends BaseFragment
         if (mUserListPresenter != null) {
             mUserListPresenter.filterSofUser(isFilterSofUser);
         }
+    }
+
+    @Override
+    public void viewReputationDetail(UserModel model) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(Setting.USER_MODEL_KEY, model);
+
+        UserReputationFragment userReputationFragment = (UserReputationFragment) getFragment(FRAGMENT_ID.USER_REPUTATION_FRAGMENT);
+        userReputationFragment.setArguments(bundle);
+
+        replaceFragment(userReputationFragment, getContainerID(),true, FRAGMENT_ID.USER_REPUTATION_FRAGMENT.getKey());
     }
 
     @Override

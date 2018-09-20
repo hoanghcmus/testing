@@ -30,6 +30,8 @@ public class UserListContract {
 
         void setListUser(BaseAdapter<UserModel, UserViewHolder> mUserAdapter);
 
+        void viewReputationDetail(UserModel model);
+
         void setMessage(String message);
     }
 }

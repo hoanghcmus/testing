@@ -19,4 +19,5 @@ public class Setting {
     public static final String OK_HTTP_CLIENT_CACHE_FILE_NAME = "responses";
 
     public static final String IS_FILTER_SOF_USER_KEY = "isFilterSofUser";
+    public static final String USER_MODEL_KEY = "userModel";
 }
