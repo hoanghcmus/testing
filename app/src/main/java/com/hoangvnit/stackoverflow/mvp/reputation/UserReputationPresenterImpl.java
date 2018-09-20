@@ -65,12 +65,12 @@ public class UserReputationPresenterImpl implements UserReputationContract.UserR
                 viewHolder.mTxtPostId.setText("Post ID:\t" + model.getPost_id());
 
                 Calendar calendar = Calendar.getInstance();
-                calendar.setTimeInMillis(model.getCreation_date());
+                calendar.setTimeInMillis(model.getCreation_date() * 1000);
 
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
-                String date = String.format("%d/%d/%d", year, day, month);
+                String date = String.format("%d/%d/%d", day, month, year);
                 viewHolder.mTxtCreateDate.setText("Create date:\t" + date);
 
                 int imageId = model.getReputation_history_type().equals("post_upvoted") ? R.drawable.ic_like : R.drawable.ic_unlike;

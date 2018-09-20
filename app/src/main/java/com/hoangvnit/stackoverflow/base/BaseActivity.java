@@ -49,7 +49,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void setActionBarTitle(String title) {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle(title.toUpperCase());
+            actionBar.setTitle(title);
             actionBar.setDisplayShowHomeEnabled(true);
         }
     }
@@ -109,7 +109,7 @@ public class BaseActivity extends AppCompatActivity {
      * @return Id of container (Id of FrameLayout)
      */
     protected int getContainerID() {
-        return R.id.main_container;
+        return 0;
     }
 
     /**

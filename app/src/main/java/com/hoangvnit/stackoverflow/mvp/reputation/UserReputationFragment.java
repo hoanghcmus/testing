@@ -5,20 +5,16 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.hoangvnit.stackoverflow.R;
 import com.hoangvnit.stackoverflow.base.BaseFragment;
 import com.hoangvnit.stackoverflow.common.EndlessRecyclerViewScrollListener;
-import com.hoangvnit.stackoverflow.common.Setting;
 import com.hoangvnit.stackoverflow.mvp.adapter.BaseAdapter;
 import com.hoangvnit.stackoverflow.mvp.holder.UserReputationViewHolder;
-import com.hoangvnit.stackoverflow.mvp.holder.UserViewHolder;
 import com.hoangvnit.stackoverflow.mvp.pojo.ReputationModel;
 import com.hoangvnit.stackoverflow.mvp.pojo.UserModel;
-import com.hoangvnit.stackoverflow.utils.LogUtils;
-import com.hoangvnit.stackoverflow.utils.PreferencesUtils;
+
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -50,8 +46,6 @@ public class UserReputationFragment extends BaseFragment
     private EndlessRecyclerViewScrollListener scrollListener;
     private BaseAdapter<ReputationModel, UserReputationViewHolder> mUserReputationAdapter;
 
-    private UserModel mUserModel;
-
 
     @Override
     protected int getLayoutID() {
@@ -61,10 +55,19 @@ public class UserReputationFragment extends BaseFragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle bundle = getArguments();
-        mUserModel = bundle.getParcelable(Setting.USER_MODEL_KEY);
 
         mUserReputationPresenter = new UserReputationPresenterImpl(this);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle state) {
+        super.onSaveInstanceState(state);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Override
@@ -72,11 +75,13 @@ public class UserReputationFragment extends BaseFragment
         setActionBarTitle(getStr(R.string.title_user_reputation));
 
         initListView();
+    }
 
+    public void onShowReputation(UserModel userModel) {
         int userId = 0;
-        if (mUserModel != null) {
-            userId = mUserModel.getUser_id();
-            updateViewData(mUserModel);
+        if (userModel != null) {
+            userId = userModel.getUser_id();
+            updateViewData(userModel);
         }
         if (mUserReputationPresenter != null) {
             mUserReputationPresenter.init(userId);
@@ -148,5 +153,8 @@ public class UserReputationFragment extends BaseFragment
         mTxtMessage.setText(message);
     }
 
+    public interface OnFragmentInteractionListener {
+        void onFragmentReputationInteraction(UserModel userModel);
+    }
 
 }

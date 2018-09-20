@@ -19,12 +19,11 @@ import android.widget.Toast;
 import com.hoangvnit.stackoverflow.R;
 import com.hoangvnit.stackoverflow.base.BaseFragment;
 import com.hoangvnit.stackoverflow.common.EndlessRecyclerViewScrollListener;
-import com.hoangvnit.stackoverflow.common.FRAGMENT_ID;
 import com.hoangvnit.stackoverflow.common.Setting;
 import com.hoangvnit.stackoverflow.mvp.adapter.BaseAdapter;
 import com.hoangvnit.stackoverflow.mvp.holder.UserViewHolder;
 import com.hoangvnit.stackoverflow.mvp.pojo.UserModel;
-import com.hoangvnit.stackoverflow.mvp.reputation.UserReputationFragment;
+import com.hoangvnit.stackoverflow.ui.MainActivity;
 import com.hoangvnit.stackoverflow.utils.LogUtils;
 import com.hoangvnit.stackoverflow.utils.PreferencesUtils;
 
@@ -68,6 +67,17 @@ public class UserListFragment extends BaseFragment
         getActivity().registerReceiver(mNetworkStateReceiver, intentFilterNetworkChange);
 
         isFilterSofUser = PreferencesUtils.getInstance(getActivity().getApplicationContext()).getBooleanValue(Setting.IS_FILTER_SOF_USER_KEY, false);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle state) {
+        super.onSaveInstanceState(state);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Override
@@ -159,13 +169,9 @@ public class UserListFragment extends BaseFragment
 
     @Override
     public void viewReputationDetail(UserModel model) {
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(Setting.USER_MODEL_KEY, model);
-
-        UserReputationFragment userReputationFragment = (UserReputationFragment) getFragment(FRAGMENT_ID.USER_REPUTATION_FRAGMENT);
-        userReputationFragment.setArguments(bundle);
-
-        replaceFragment(userReputationFragment, getContainerID(),true, FRAGMENT_ID.USER_REPUTATION_FRAGMENT.getKey());
+        MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity.onFragmentUserListInteraction(model);
+        mainActivity.showDetail(true);
     }
 
     @Override
@@ -205,5 +211,9 @@ public class UserListFragment extends BaseFragment
                 }
             }
         }
+    }
+
+    public interface OnFragmentInteractionListener {
+        void onFragmentUserListInteraction(UserModel userModel);
     }
 }
