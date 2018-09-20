@@ -17,10 +17,10 @@ public class ReputationModel extends BaseModel {
     private String reputation_history_type;
 
     @Expose
-    private String reputation_change;
+    private int reputation_change;
 
     @Expose
-    private Date creation_date;
+    private long creation_date;
 
     @Expose
     private int post_id;
@@ -33,19 +33,19 @@ public class ReputationModel extends BaseModel {
         this.reputation_history_type = reputation_history_type;
     }
 
-    public String getReputation_change() {
+    public int getReputation_change() {
         return reputation_change;
     }
 
-    public void setReputation_change(String reputation_change) {
+    public void setReputation_change(int reputation_change) {
         this.reputation_change = reputation_change;
     }
 
-    public Date getCreation_date() {
+    public long getCreation_date() {
         return creation_date;
     }
 
-    public void setCreation_date(Date creation_date) {
+    public void setCreation_date(long creation_date) {
         this.creation_date = creation_date;
     }
 
@@ -60,20 +60,15 @@ public class ReputationModel extends BaseModel {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.reputation_history_type);
-        dest.writeString(this.reputation_change);
-        dest.writeString(this.creation_date.toString());
+        dest.writeInt(this.reputation_change);
+        dest.writeLong(this.creation_date);
         dest.writeInt(this.post_id);
     }
 
     protected ReputationModel(Parcel in) {
         this.reputation_history_type = in.readString();
-        this.reputation_change = in.readString();
-        DateFormat df = new SimpleDateFormat(Setting.GSON_DATE_FORMAT);
-        try {
-            this.creation_date = df.parse(in.readString());
-        } catch (ParseException e) {
-            LogUtils.e("Read data from Parcel failed: " + e.getMessage());
-        }
+        this.reputation_change = in.readInt();
+        this.creation_date = in.readLong();
         this.post_id = in.readInt();
     }
 

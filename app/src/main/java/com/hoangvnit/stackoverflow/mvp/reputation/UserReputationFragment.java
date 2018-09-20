@@ -19,8 +19,10 @@ import com.hoangvnit.stackoverflow.mvp.pojo.ReputationModel;
 import com.hoangvnit.stackoverflow.mvp.pojo.UserModel;
 import com.hoangvnit.stackoverflow.utils.LogUtils;
 import com.hoangvnit.stackoverflow.utils.PreferencesUtils;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * @author Nguyen Ngoc Hoang (www.hoangvnit.com)
@@ -28,16 +30,27 @@ import butterknife.BindView;
 public class UserReputationFragment extends BaseFragment
         implements UserReputationContract.UserReputationView {
 
+    @BindView(R.id.name)
+    public TextView mTxtName;
+
+    @BindView(R.id.location)
+    public TextView mTxtLocation;
+
+    @BindView(R.id.avatar)
+    public CircleImageView mImgAvatar;
+
     @BindView(R.id.empty_view)
     TextView mTxtMessage;
 
-    @BindView(R.id.user_list_recycler_view)
+    @BindView(R.id.user_reputation_list_recycler_view)
     RecyclerView mRclUserReputationList;
 
     private UserReputationContract.UserReputationPresenter mUserReputationPresenter;
     private LinearLayoutManager mLinearLayoutManager;
     private EndlessRecyclerViewScrollListener scrollListener;
     private BaseAdapter<ReputationModel, UserReputationViewHolder> mUserReputationAdapter;
+
+    private UserModel mUserModel;
 
 
     @Override
@@ -48,19 +61,33 @@ public class UserReputationFragment extends BaseFragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle bundle = getArguments();
+        mUserModel = bundle.getParcelable(Setting.USER_MODEL_KEY);
+
         mUserReputationPresenter = new UserReputationPresenterImpl(this);
     }
 
     @Override
     protected void initView() {
-
-
         setActionBarTitle(getStr(R.string.title_user_reputation));
 
         initListView();
-        if (mUserReputationPresenter != null) {
-            mUserReputationPresenter.init();
+
+        int userId = 0;
+        if (mUserModel != null) {
+            userId = mUserModel.getUser_id();
+            updateViewData(mUserModel);
         }
+        if (mUserReputationPresenter != null) {
+            mUserReputationPresenter.init(userId);
+        }
+    }
+
+    private void updateViewData(UserModel userModel) {
+        mTxtName.setText(userModel.getDisplay_name());
+        mTxtLocation.setText("Address: \t" + userModel.getLocation());
+        Picasso.get().load(userModel.getUser_image())
+                .into(mImgAvatar);
     }
 
     @Override
@@ -82,11 +109,9 @@ public class UserReputationFragment extends BaseFragment
         return new EndlessRecyclerViewScrollListener(mLinearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-
                 if (mUserReputationPresenter != null) {
                     mUserReputationPresenter.loadMore(page + 1);
                 }
-
             }
         };
     }
@@ -109,7 +134,13 @@ public class UserReputationFragment extends BaseFragment
 
     @Override
     public void setListReputation(BaseAdapter<ReputationModel, UserReputationViewHolder> userReputationAdapter) {
-
+        if (mUserReputationAdapter == null) {
+            mUserReputationAdapter = userReputationAdapter;
+            mRclUserReputationList.setAdapter(mUserReputationAdapter);
+        }
+        boolean isListReputationEmpty = mUserReputationAdapter.getItemCount() == 0;
+        adjustDisplayOfListUserReputationSection(isListReputationEmpty);
+        setMessage(getStr(isListReputationEmpty ? R.string.msg_info_list_user_empty : R.string.empty));
     }
 
     @Override

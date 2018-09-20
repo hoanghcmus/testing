@@ -19,7 +19,7 @@ public class UserReputationContract {
 
     public interface UserReputationPresenter extends BaseContract.BasePresenter<UserReputationView> {
 
-        void init();
+        void init(int userId);
 
         void unSubscribe();
 

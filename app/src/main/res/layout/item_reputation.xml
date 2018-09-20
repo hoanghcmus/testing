@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,121 +7,90 @@
     android:layout_marginRight="@dimen/_5dp"
     android:layout_marginTop="@dimen/_5dp"
     android:clickable="true"
-    android:foreground="?attr/selectableItemBackground"
-    app:cardBackgroundColor="@color/colorAccent">
+    android:foreground="?attr/selectableItemBackground">
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/white">
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/_8dp"
+        android:layout_marginRight="@dimen/_16dp"
+        android:layout_toRightOf="@id/avatar"
+        android:orientation="vertical">
 
-        <TextView
-
-            android:layout_width="@dimen/_100dp"
-            android:layout_height="@dimen/_100dp"
-            android:text="@string/empty"
-            android:visibility="invisible" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-
-            android:layout_width="@dimen/_72dp"
-            android:layout_height="@dimen/_72dp"
-            android:layout_centerVertical="true"
-            android:layout_margin="@dimen/_16dp"
-            app:civ_border_width="@dimen/_0dp" />
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/_8dp"
-            android:layout_marginRight="@dimen/_16dp"
-            android:layout_toRightOf="@id/avatar"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:fontFamily="sans-serif"
-                    android:textSize="@dimen/_18sp"
-                    android:textStyle="bold"
-                    tools:text="Admin" />
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:fontFamily="sans-serif"
-                    android:textColor="@color/grey_light_new"
-                    android:textSize="@dimen/_18sp"
-                    android:visibility="invisible"
-                    tools:text="Age" />
-
-            </RelativeLayout>
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/reputation_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:fontFamily="sans-serif"
+                android:textSize="@dimen/_18sp"
+                android:textStyle="bold"
+                tools:text="Reputation type" />
 
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/img_reputation_type"
+                android:layout_width="@dimen/_14dp"
+                android:layout_height="@dimen/_14dp"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="@dimen/_8dp"
+                android:layout_marginRight="@dimen/_5dp"
+                android:layout_toLeftOf="@+id/reputation_change"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_like"
+                android:tint="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/reputation_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/grey_light_new"
+                android:textSize="@dimen/_14sp"
+                tools:text="vote" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/post_ids"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_marginTop="@dimen/_6dp"
                 android:fontFamily="sans-serif"
+                android:text="@string/sof_user"
+                android:textColor="@color/grey_light_new"
                 android:textSize="@dimen/_14sp"
-                tools:text="Location" />
+                tools:text="Post Id" />
 
-
-            <RelativeLayout
+            <TextView
+                android:id="@+id/create_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="@dimen/_6dp"
+                android:layout_toLeftOf="@+id/star"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/grey_light_new"
+                android:textSize="@dimen/_14sp"
+                tools:text="Create date" />
 
-                <TextView
+        </RelativeLayout>
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginTop="@dimen/_6dp"
-                    android:fontFamily="sans-serif"
-                    android:text="@string/sof_user"
-                    android:textColor="@color/grey_light_new"
-                    android:textSize="@dimen/_14sp"
-                    tools:text="SOF user" />
+    </LinearLayout>
 
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="@dimen/_6dp"
-                    android:layout_toLeftOf="@+id/star"
-                    android:fontFamily="sans-serif"
-                    android:textColor="@color/grey_light_new"
-                    android:textSize="@dimen/_14sp"
-                    tools:text="Reputation" />
-
-                <ImageView
-
-                    android:layout_width="@dimen/_14dp"
-                    android:layout_height="@dimen/_14dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginTop="@dimen/_18dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_start"
-                    android:tint="@color/colorPrimary" />
-
-            </RelativeLayout>
-
-        </LinearLayout>
-    </RelativeLayout>
 </android.support.v7.widget.CardView>

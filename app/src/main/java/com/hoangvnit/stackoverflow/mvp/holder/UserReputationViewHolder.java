@@ -1,6 +1,7 @@
 package com.hoangvnit.stackoverflow.mvp.holder;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hoangvnit.stackoverflow.R;
@@ -12,26 +13,20 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @author Nguyen Ngoc Hoang (www.hoangvnit.com)
  */
 public class UserReputationViewHolder extends BaseViewHolder {
-    @BindView(R.id.userId)
-    public TextView mTxUserId;
+    @BindView(R.id.reputation_type)
+    public TextView mTxtReputationType;
 
-    @BindView(R.id.name)
-    public TextView mTxtName;
+    @BindView(R.id.reputation_change)
+    public TextView mTxtReputationChange;
 
-    @BindView(R.id.age)
-    public TextView mTxtAge;
+    @BindView(R.id.post_ids)
+    public TextView mTxtPostId;
 
-    @BindView(R.id.location)
-    public TextView mTxtLocation;
+    @BindView(R.id.create_date)
+    public TextView mTxtCreateDate;
 
-    @BindView(R.id.reputation)
-    public TextView mTxtReputation;
-
-    @BindView(R.id.sof)
-    public TextView mTxtSOFUser;
-
-    @BindView(R.id.avatar)
-    public CircleImageView mImgAvatar;
+    @BindView(R.id.img_reputation_type)
+    public ImageView mImgReputationType;
 
     public UserReputationViewHolder(View itemView) {
         super(itemView);

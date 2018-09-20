@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -35,8 +36,10 @@
         android:background="@android:color/white"
         android:gravity="center"
         android:padding="@dimen/_16dp"
+        android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/_18sp"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        tools:text="Empty view" />
 
 </LinearLayout>

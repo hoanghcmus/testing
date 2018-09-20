@@ -43,7 +43,9 @@ public class UserReputationPresenterImpl implements UserReputationContract.UserR
     }
 
     @Override
-    public void init() {
+    public void init(int userId) {
+
+        this.mUserId = userId;
 
         mUserService = RestClient.getInstance().getUserService();
 
