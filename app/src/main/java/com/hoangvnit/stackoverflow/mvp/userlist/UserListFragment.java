@@ -193,7 +193,6 @@ public class UserListFragment extends BaseFragment
                 NetworkInfo ni = (NetworkInfo) intent.getExtras().get(ConnectivityManager.EXTRA_NETWORK_INFO);
                 if (ni != null && ni.getState() == NetworkInfo.State.CONNECTED) {
                     if (!isFirstTime) {
-                        LogUtils.e("Network connected");
                         Toast.makeText(context,
                                 context.getResources().getString(R.string.msg_network_connected),
                                 Toast.LENGTH_SHORT).show();
@@ -203,7 +202,6 @@ public class UserListFragment extends BaseFragment
                     }
                     isFirstTime = false;
                 } else if (intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, Boolean.FALSE)) {
-                    LogUtils.e("Network disconnected");
                     Toast.makeText(context,
                             context.getResources().getString(R.string.msg_network_dis_connected),
                             Toast.LENGTH_SHORT).show();

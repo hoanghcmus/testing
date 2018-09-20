@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.hoangvnit.stackoverflow.R;
@@ -63,11 +64,11 @@ public class BaseActivity extends AppCompatActivity {
             mProgressDialog = new Dialog(this);
             mProgressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             mProgressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-//            mProgressDialog.setContentView(R.layout.dialog_loading);
+            mProgressDialog.setContentView(R.layout.dialog_loading);
             mProgressDialog.getWindow().getAttributes().width = WindowManager.LayoutParams.WRAP_CONTENT;
 
-//            ProgressBar progressBar = (ProgressBar) mProgressDialog.findViewById(R.id.progressBar);
-//            progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(android.R.color.transparent), android.graphics.PorterDuff.Mode.SRC_ATOP);
+            ProgressBar progressBar = mProgressDialog.findViewById(R.id.progressBar);
+            progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(android.R.color.transparent), android.graphics.PorterDuff.Mode.SRC_ATOP);
 
             mProgressDialog.setCanceledOnTouchOutside(false);
             mProgressDialog.show();

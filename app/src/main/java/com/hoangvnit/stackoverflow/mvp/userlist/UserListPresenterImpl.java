@@ -82,6 +82,7 @@ public class UserListPresenterImpl implements UserListContract.UserListPresenter
 
     @Override
     public void loadMore(int page) {
+        LogUtils.i("hcmus - load page: " + page);
         fetchUserList(page, 30);
     }
 
