@@ -1,5 +1,7 @@
 package com.hoangvnit.stackoverflow.mvp.reputation;
 
+import android.support.v4.content.ContextCompat;
+
 import com.hoangvnit.stackoverflow.R;
 import com.hoangvnit.stackoverflow.mvp.adapter.BaseAdapter;
 import com.hoangvnit.stackoverflow.mvp.holder.UserReputationViewHolder;
@@ -10,7 +12,9 @@ import com.hoangvnit.stackoverflow.rest.UserService;
 import com.hoangvnit.stackoverflow.rx.SimpleSubscriber;
 import com.hoangvnit.stackoverflow.utils.LogUtils;
 import com.hoangvnit.stackoverflow.utils.NetworkUtils;
+import com.squareup.picasso.Picasso;
 
+import java.util.Calendar;
 import java.util.List;
 
 import rx.Subscription;
@@ -55,6 +59,22 @@ public class UserReputationPresenterImpl implements UserReputationContract.UserR
         ) {
             @Override
             protected void populateViewHolder(UserReputationViewHolder viewHolder, ReputationModel model, int position) {
+                String type = model.getReputation_history_type().equals("post_upvoted") ? "Up voting" : "Down voting";
+                viewHolder.mTxtReputationType.setText(type);
+                viewHolder.mTxtReputationChange.setText("" + model.getReputation_change());
+                viewHolder.mTxtPostId.setText("Post ID:\t" + model.getPost_id());
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(model.getCreation_date());
+
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                String date = String.format("%d/%d/%d", year, day, month);
+                viewHolder.mTxtCreateDate.setText("Create date:\t" + date);
+
+                int imageId = model.getReputation_history_type().equals("post_upvoted") ? R.drawable.ic_like : R.drawable.ic_unlike;
+                Picasso.get().load(imageId).into(viewHolder.mImgReputationType);
 
             }
         };

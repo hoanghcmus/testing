@@ -24,7 +24,6 @@
         android:layout_marginRight="@dimen/_16dp"
         android:fontFamily="sans-serif"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/_18sp"
         android:textStyle="bold"
         tools:text="Admin" />
@@ -39,7 +38,6 @@
         android:layout_marginTop="@dimen/_6dp"
         android:fontFamily="sans-serif"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/_14sp"
         tools:text="Location" />
 
